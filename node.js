@@ -1,25 +1,22 @@
-import { enc, mode, pad, AES } from 'crypto-js';
-import request from 'superagent';
-import IP from 'ip';
+const { enc, mode, pad, AES } = require('crypto-js');
+const request = require('superagent');
+const IP = require('ip');
 
-import Token from './resources/token';
-import Customers from './resources/customers';
-import Plans from './resources/plans';
-import Subscriptions from './resources/subscriptions';
-import Bank from './resources/bank';
-import Cash from './resources/cash';
-import Charge from './resources/charge';
+const Token = require('./resources/token');
+const Customers = require('./resources/customers');
+const Plans = require('./resources/plans');
+const Subscriptions = require('./resources/subscriptions');
+const Bank = require('./resources/bank');
+const Cash = require('./resources/cash');
+const Charge = require('./resources/charge');
 
 const lenguaje = 'javascript';
 
-export default class Epayco {
-
-	static BASE_URL = 'https://api.secure.payco.co';
-	static BASE_URL_SECURE = 'https://secure.payco.co';
+class Epayco {
 
 	constructor({ apiKey, privateKey, test }){
 		if (!(this instanceof Epayco)) {
-			return new Epayco({ apiKey, privateKey test });
+			return new Epayco({ apiKey, privateKey, test });
 		}
 
 		this.__apiKey = apiKey;
@@ -61,7 +58,10 @@ export default class Epayco {
 				});
 		});
 	}
-}
+};
+
+Epayco.BASE_URL = 'https://api.secure.payco.co';
+Epayco.BASE_URL_SECURE = 'https://secure.payco.co';
 
 function setData(data, privateKey, publicKey, test) {
 	return Object.assign({ public_key, lenguaje,
@@ -94,4 +94,4 @@ function encryptHex(userKey) {
 		p: enc.Hex.parse(userKey).toString(enc.Base64)
 	}
 }
-
+module.exports = Epayco;

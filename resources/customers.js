@@ -1,8 +1,6 @@
-export default class Customers {
+class Customers {
 
-	static URL = '/payment/v1/customer';
-
-	constructor(epayco) {
+	constructor(e) {
 		this._E = e;
 	}
 	/**
@@ -40,4 +38,5 @@ export default class Customers {
 	}
 }
 
-util.inherits(customers, Resource);
+Customers.URL = '/payment/v1/customer';
+module.exports = Customers;

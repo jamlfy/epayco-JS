@@ -1,8 +1,6 @@
-export default class Plans {
+class Plans {
 
-	static URL = '/recurring/v1/plan';
-
-	constructor(epayco) {
+	constructor(e) {
 		this._E = e;
 	}
 	/**
@@ -38,4 +36,7 @@ export default class Plans {
 	delete(uid) {
 		return this._E.__request('post', `${Plans.URL}/remove/${this._E.__apiKey}/${uid}/`, null, false);
 	}
-}
+};
+
+Plans.URL = '/recurring/v1/plan';
+module.exports = Plans;

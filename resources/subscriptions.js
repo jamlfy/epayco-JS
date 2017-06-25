@@ -1,8 +1,6 @@
-export default class Subscriptions {
+class Subscriptions {
 
-	static URL = '/recurring/v1/subscription';
-
-	constructor(epayco) {
+	constructor(e) {
 		this._E = e;
 	}
 	/**
@@ -50,6 +48,7 @@ export default class Subscriptions {
 	charge(options) {
 		return this._E.__request('post', "/payment/v1/charge/subscription/create", options, false);
 	}
-}
+};
 
-util.inherits(subscriptions, Resource);
+Subscriptions.URL = '/recurring/v1/subscription';
+module.exports = Subscriptions;

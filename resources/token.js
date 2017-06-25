@@ -1,5 +1,6 @@
-export default class token {
-	constructor(epayco) {
+module.exports = class token {
+
+	constructor(e) {
 		this._E = e;
 	}
 	/**

@@ -1,6 +1,4 @@
-export default class Cash {
-
-	static URL = '/restpagos/';
+class Cash {
 
 	constructor(e){
 		this._E = e;
@@ -13,4 +11,7 @@ export default class Cash {
 	get(uid) {
 		return this._E.__request('get', `${Cash.URL}transaction/response.json?ref_payco=${uid}&&public_key=${this._E.__apiKey}`, null, true);
 	}
-}
+};
+
+Cash.URL = '/restpagos/';
+module.exports = Cash;

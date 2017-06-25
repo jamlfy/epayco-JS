@@ -22,6 +22,7 @@
   "homepage": "https://github.com/alejonext/epayco-JS#readme",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
+    "ip": "^1.1.5",
     "query-string": "^4.3.4",
     "superagent": "^3.5.2"
   }

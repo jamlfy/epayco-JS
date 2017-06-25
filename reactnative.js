@@ -1,6 +1,5 @@
 import { enc, mode, pad, AES } from 'crypto-js';
 import { stringify } from 'query-string';
-import NetworkInfo from 'react-native-network-info';
 
 import Token from './resources/token';
 import Customers from './resources/customers';
@@ -12,7 +11,7 @@ import Charge from './resources/charge';
 
 const lenguaje = 'javascript';
 
-export class Epayco {
+export default class Epayco {
 
 	static BASE_URL = 'https://api.secure.payco.co';
 	static BASE_URL_SECURE = 'https://secure.payco.co';
@@ -22,7 +21,7 @@ export class Epayco {
 		'type' : 'sdk'
 	};
 
-	constructor({ apiKey, privateKey, test }){
+	constructor({ apiKey, privateKey, test, update }){
 		if (!(this instanceof Epayco)) {
 			return new Epayco({ apiKey, privateKey test });
 		}
@@ -38,16 +37,13 @@ export class Epayco {
 		this.bank = new Bank(this);
 		this.cash = new Cash(this);
 		this.charge = new Charge(this);
-		this.updateIp();
 	}
 
-	updateIp (){
-		NetworkInfo.getIPAddress(ip => this.ip = ip);
+	updateIp (ip){
+		this.ip = ip;
 	}
 
 	__request (method, url, data={}, sw) {
-		this.updateIp();
-
 		var body;
 		var header = Object.assign({
 			'Authorization': 'Basic '+ btoa( this.__apiKey + ':')

@@ -1,4 +1,5 @@
-export default class Charge {
+module.exports = class Charge {
+
 	constructor(e) {
 		 this._E = e;
 	}

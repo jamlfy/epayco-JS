@@ -1,6 +1,4 @@
-export default class Bank {
-
-	static URL = '/restpagos/';
+class Bank {
 
 	constructor(e){
 		this._E = e;
@@ -13,4 +11,7 @@ export default class Bank {
 	get(uid) {
 		return this._E.__request('get', `${Bank.URL}pse/transactioninfomation.json?transactionID=${uid}&&public_key=${this._E.__apiKey}`, null, true);
 	}
-}
+};
+
+Bank.URL = '/restpagos/';
+module.exports = Bank;
