@@ -1,0 +1,28 @@
+{
+  "name": "epayco-js",
+  "version": "1.0.0",
+  "description": "epayco client",
+  "main": "node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alejonext/epayco-JS.git"
+  },
+  "keywords": [
+    "epayco",
+    "client"
+  ],
+  "author": "alejonext <alejonext@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alejonext/epayco-JS/issues"
+  },
+  "homepage": "https://github.com/alejonext/epayco-JS#readme",
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "query-string": "^4.3.4",
+    "superagent": "^3.5.2"
+  }
+}
