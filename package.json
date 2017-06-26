@@ -1,5 +1,5 @@
 {
-  "name": "epayco-js",
+  "name": "epayco",
   "version": "1.0.0",
   "description": "epayco client",
   "main": "node.js",

@@ -21,9 +21,9 @@ export default class Epayco {
 		'type' : 'sdk'
 	};
 
-	constructor({ apiKey, privateKey, test, update }){
+	constructor({ apiKey, privateKey, test }){
 		if (!(this instanceof Epayco)) {
-			return new Epayco({ apiKey, privateKey test });
+			return new Epayco({ apiKey, privateKey, test });
 		}
 
 		this.__apiKey = apiKey;
