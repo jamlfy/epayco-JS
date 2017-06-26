@@ -64,9 +64,17 @@ Epayco.BASE_URL = 'https://api.secure.payco.co';
 Epayco.BASE_URL_SECURE = 'https://secure.payco.co';
 
 function setData(data, privateKey, publicKey, test) {
-	return Object.assign({ public_key, lenguaje,
+	var set = { public_key, lenguaje,
 		enpruebas : encrypt('TRUE', privateKey)
-	}, encryptHex(privateKey));
+	};
+
+	for (var key in data) {
+		if (data.hasOwnProperty(key)) {
+			set[langkey(key)] = encrypt(data[key], privateKey);
+		}
+	}
+
+	return Object.assign(set, encryptHex(privateKey));
 }
 
 /**
