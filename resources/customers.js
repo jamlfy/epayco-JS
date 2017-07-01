@@ -9,7 +9,7 @@ class Customers {
 	 * @api public
 	 */
 	create(options) {
-		return this._E.__request('post', `${Customers.URL}/create`, options, false);
+		return this._E.__request('post', `${Customers.URL}/create?`, options, false);
 	}
 	/**
 	 * Retrieve Customer
@@ -18,14 +18,14 @@ class Customers {
 	 * @api public
 	 */
 	get(uid) {
-		return this._E.__request('get', `${Customers.URL}/${this._E.__apiKey}/${uid}/`, null, false);
+		return this._E.__request('get', `${Customers.URL}/${this._E.__apiKey}/${uid}`, null, false);
 	}
 	/**
 	 * List Customer
 	 * @api public
 	 */
 	list() {
-		return this._E.__request('get', `${Customers.URL}s/${this._E.__apiKey}/`, null, false);
+		return this._E.__request('get', `${Customers.URL}s/${this._E.__apiKey}`, null, false);
 	}
 	/**
 	 * Update Customer
@@ -34,7 +34,7 @@ class Customers {
 	 * @api public
 	 */
 	update(uid, options) {
-		return this._E.__request('post', `${Customers.URL}/edit/${this._E.__apiKey}/${uid}/`, options, false);
+		return this._E.__request('post', `${Customers.URL}/edit/${this._E.__apiKey}/${uid}`, options, false);
 	}
 }
 

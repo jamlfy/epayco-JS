@@ -19,7 +19,10 @@ module.exports = class Charge {
 	* @param {String} uid
 	* @api public
 	*/
-	get(uid) {
-		return this._E.__request('get', `/restpagos/transaction/response.json?ref_payco=${uid}&&public_key=${this._E.__apiKey}`, false, true);
+	get(ref_payco) {
+		return this._E.__request('get', `/restpagos/transaction/response.json`, {
+			ref_payco,
+			public_key: this._E.__apiKey
+		}, true);
 	}
 }

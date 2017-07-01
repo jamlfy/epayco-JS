@@ -18,14 +18,14 @@ class Plans {
 	 * @api public
 	 */
 	get(uid) {
-		return this._E.__request('get', `${Plans.URL}/${this._E.__apiKey}/${uid}/`, null, false);
+		return this._E.__request('get', `${Plans.URL}/${this._E.__apiKey}/${uid}`, null, false);
 	}
 	/**
 	 * List Plans
 	 * @api public
 	 */
 	list() {
-		return this._E.__request('get', `${Plans.URL}s/${this._E.__apiKey}/`, null, false);
+		return this._E.__request('get', `${Plans.URL}s/${this._E.__apiKey}`, null, false);
 	}
 	/**
 	 * Remove Plan
@@ -34,7 +34,7 @@ class Plans {
 	 * @api public
 	 */
 	delete(uid) {
-		return this._E.__request('post', `${Plans.URL}/remove/${this._E.__apiKey}/${uid}/`, null, false);
+		return this._E.__request('post', `${Plans.URL}/remove/${this._E.__apiKey}/${uid}`, null, false);
 	}
 };
 

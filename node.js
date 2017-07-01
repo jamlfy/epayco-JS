@@ -1,7 +1,7 @@
-const { enc, mode, pad, AES } = require('crypto-js');
 const request = require('superagent');
 const IP = require('ip');
 
+const setData = require('./resources/crypto');
 const Token = require('./resources/token');
 const Customers = require('./resources/customers');
 const Plans = require('./resources/plans');
@@ -14,6 +14,13 @@ const lenguaje = 'javascript';
 
 class Epayco {
 
+	/**
+	 * [constructor description]
+	 * @param  {String} options.apiKey
+	 * @param  {String} options.privateKey
+	 * @param  {Boolean} options.test
+	 * @return {Object}
+	 */
 	constructor({ apiKey, privateKey, test }){
 		if (!(this instanceof Epayco)) {
 			return new Epayco({ apiKey, privateKey, test });
@@ -30,8 +37,18 @@ class Epayco {
 		this.bank = new Bank(this);
 		this.cash = new Cash(this);
 		this.charge = new Charge(this);
+
+		return this;
 	}
 
+	/**
+	 * [__request description]
+	 * @param  {String} method
+	 * @param  {String} url
+	 * @param  {Object} data
+	 * @param  {Boolean} sw
+	 * @return {Promise}
+	 */
 	__request (method, url, data={}, sw) {
 		//Set ip
 		data['ip'] = IP.address();
@@ -43,63 +60,16 @@ class Epayco {
 			url = Epayco.BASE_URL + url;
 		}
 
-		 return new Promise((resolve, reject) => {
-			request(method, url)
+		 return new Promise((resolve, reject) => request(method, url)
 				.auth(this.__apiKey, '')
 				.set('type', 'sdk')
 				.query(method === 'get' && data || {})
 				.send(method !== 'get' && data || {})
-				.end(function(res) {
-					if (res.ok) {
-						return resolve(res.body);
-					} else {
-						return reject(res.error);
-					}
-				});
-		});
+				.end((res) => res.ok ? resolve(res.body) : reject(res.error)));
 	}
 };
 
 Epayco.BASE_URL = 'https://api.secure.payco.co';
 Epayco.BASE_URL_SECURE = 'https://secure.payco.co';
 
-function setData(data, privateKey, publicKey, test) {
-	var set = { public_key, lenguaje,
-		enpruebas : encrypt('TRUE', privateKey)
-	};
-
-	for (var key in data) {
-		if (data.hasOwnProperty(key)) {
-			set[langkey(key)] = encrypt(data[key], privateKey);
-		}
-	}
-
-	return Object.assign(set, encryptHex(privateKey));
-}
-
-/**
- * Encrypt text
- * @param  {string} value plain text
- * @param  {string} key   private key user
- * @return {string}       text encrypt
- */
-function encrypt(value, userKey) {
-	return AES.encrypt(value, enc.Hex.parse(userKey), {
-		iv : enc.Hex.parse('0000000000000000'),
-		mode: mode.CBC,
-		padding: pad.Pkcs7
-	}).ciphertext.toString(enc.Base64);
-}
-
-/**
- * Get bites petition secure
- * @param  {string} userKey private key user
- * @return {object}         bites from crypto-js
- */
-function encryptHex(userKey) {
-	return {
-		i: enc.Hex.parse('0000000000000000').toString(enc.Base64),
-		p: enc.Hex.parse(userKey).toString(enc.Base64)
-	}
-}
 module.exports = Epayco;

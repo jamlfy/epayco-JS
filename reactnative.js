@@ -1,6 +1,6 @@
-import { enc, mode, pad, AES } from 'crypto-js';
 import { stringify } from 'query-string';
 
+import setData from './resources/crypto';
 import Token from './resources/token';
 import Customers from './resources/customers';
 import Plans from './resources/plans';
@@ -15,12 +15,19 @@ export default class Epayco {
 
 	static BASE_URL = 'https://api.secure.payco.co';
 	static BASE_URL_SECURE = 'https://secure.payco.co';
-	static HEADERS =  {
+	static HEADERS = {
 		'Accept': 'application/json',
 		'Content-Type': 'application/json',
 		'type' : 'sdk'
 	};
 
+	/**
+	 * [constructor description]
+	 * @param  {String} options.apiKey
+	 * @param  {String} options.privateKey
+	 * @param  {Boolean} options.test
+	 * @return {Object}
+	 */
 	constructor({ apiKey, privateKey, test }){
 		if (!(this instanceof Epayco)) {
 			return new Epayco({ apiKey, privateKey, test });
@@ -37,19 +44,35 @@ export default class Epayco {
 		this.bank = new Bank(this);
 		this.cash = new Cash(this);
 		this.charge = new Charge(this);
+
+		return this;
 	}
 
+	/**
+	 * [updateIp description]
+	 * @param  {String} ip
+	 */
 	updateIp (ip){
 		this.ip = ip;
 	}
 
+	/**
+	 * [__request description]
+	 * @param  {String} method
+	 * @param  {String} url
+	 * @param  {Object} data
+	 * @param  {Boolean} sw
+	 * @return {Promise}
+	 */
 	__request (method, url, data={}, sw) {
 		var body;
 		var header = Object.assign({
 			'Authorization': 'Basic '+ btoa( this.__apiKey + ':')
 		}, Epayco.HEADERS);
 
-		data['ip'] = this.ip;
+		if(this.ip){
+			data['ip'] = this.ip;
+		}
 
 		if (sw) {
 			data = setData(data, this.__privateKey, this.__apiKey, this.test);
@@ -59,7 +82,7 @@ export default class Epayco {
 		}
 
 		if( method === 'get' ){
-			url +=  '&' + stringify(data);
+			url +=  '?' + stringify(data);
 		} else {
 			body = JSON.stringify(data);
 		}
@@ -67,43 +90,3 @@ export default class Epayco {
 		return fetch(url, { method, header, body});
 	}
 }
-
-function setData(data, privateKey, publicKey, test) {
-	var set = { public_key, lenguaje,
-		enpruebas : encrypt('TRUE', privateKey)
-	};
-	for (var key in data) {
-		if (data.hasOwnProperty(key)) {
-			set[langkey(key)] = encrypt(data[key], privateKey);
-		}
-	}
-
-	return Object.assign(set, encryptHex(privateKey));
-}
-
-/**
- * Encrypt text
- * @param  {string} value plain text
- * @param  {string} key   private key user
- * @return {string}       text encrypt
- */
-function encrypt(value, userKey) {
-	return AES.encrypt(value, enc.Hex.parse(userKey), {
-		iv : enc.Hex.parse('0000000000000000'),
-		mode: mode.CBC,
-		padding: pad.Pkcs7
-	}).ciphertext.toString(enc.Base64);
-}
-
-/**
- * Get bites petition secure
- * @param  {string} userKey private key user
- * @return {object}         bites from crypto-js
- */
-function encryptHex(userKey) {
-	return {
-		i: enc.Hex.parse('0000000000000000').toString(enc.Base64),
-		p: enc.Hex.parse(userKey).toString(enc.Base64)
-	}
-}
-

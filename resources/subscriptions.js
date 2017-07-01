@@ -18,14 +18,14 @@ class Subscriptions {
 	 * @api public
 	 */
 	get(uid) {
-		return this._E.__request('get', `${Subscriptions.URL}/${uid}/${this._E.__apiKey}/`, null, false);
+		return this._E.__request('get', `${Subscriptions.URL}/${uid}/${this._E.__apiKey}`, null, false);
 	}
 	/**
 	 * List Subscriptions
 	 * @api public
 	 */
 	list() {
-		return this._E.__request('get', `${Subscriptions.URL}s/${this._E.__apiKey}/`, null, false);
+		return this._E.__request('get', `${Subscriptions.URL}s/${this._E.__apiKey}`, null, false);
 	}
 	/**
 	 * Cancel Subscriptions
@@ -46,7 +46,7 @@ class Subscriptions {
 	 * @api public
 	 */
 	charge(options) {
-		return this._E.__request('post', "/payment/v1/charge/subscription/create", options, false);
+		return this._E.__request('post', '/payment/v1/charge/subscription/create', options, false);
 	}
 };
 
