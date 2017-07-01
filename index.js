@@ -55,7 +55,7 @@ class Epayco {
 	 */
 	__request (method, url, data={}, sw) {
 		if(this.ip){
-			data['ip'] = IP.address();
+			data['ip'] = this.ip;
 		}
 
 		if (sw) {
