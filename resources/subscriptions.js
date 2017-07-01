@@ -8,7 +8,7 @@ class Subscriptions {
 	 * @param {Object} options
 	 * @api public
 	 */
-	create(options) {
+	create(options={}) {
 		return this._E.__request('post', `${Subscriptions.URL}/create`, options, false);
 	}
 	/**
@@ -35,8 +35,7 @@ class Subscriptions {
 	 */
 	cancel(id) {
 		return this._E.__request('post', `${Subscriptions.URL}/cancel`, {
-			id,
-			public_key: this._E.__apiKey
+			id, public_key: this._E.__apiKey
 		}, false);
 	}
 	/**
@@ -45,7 +44,7 @@ class Subscriptions {
 	 * @param {String} uid
 	 * @api public
 	 */
-	charge(options) {
+	charge(options={}) {
 		return this._E.__request('post', '/payment/v1/charge/subscription/create', options, false);
 	}
 };

@@ -9,7 +9,7 @@ module.exports = class Charge {
 	* @param {Object} options
 	* @api public
 	*/
-	create(options) {
+	create(options={}) {
 		return this._E.__request('post', '/payment/v1/charge/create', options, false);
 	}
 
@@ -21,8 +21,7 @@ module.exports = class Charge {
 	*/
 	get(ref_payco) {
 		return this._E.__request('get', `/restpagos/transaction/response.json`, {
-			ref_payco,
-			public_key: this._E.__apiKey
+			ref_payco, public_key: this._E.__apiKey
 		}, true);
 	}
 }

@@ -8,8 +8,8 @@ class Bank {
 	 * @param  {Object} opts 
 	 * @return {Promise}
 	 */
-	create(opts){
-		return this._E.__request('post', `${Bank.URL}pagos/debitos.json`, options, true);
+	create(opts={}){
+		return this._E.__request('post', `${Bank.URL}pagos/debitos.json`, opts, true);
 	}
 
 	/**

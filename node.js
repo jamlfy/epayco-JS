@@ -16,8 +16,8 @@ class Epayco {
 
 	/**
 	 * [constructor description]
-	 * @param  {String} options.apiKey
-	 * @param  {String} options.privateKey
+	 * @param  {String}  options.apiKey
+	 * @param  {String}  options.privateKey
 	 * @param  {Boolean} options.test
 	 * @return {Object}
 	 */
@@ -43,9 +43,9 @@ class Epayco {
 
 	/**
 	 * [__request description]
-	 * @param  {String} method
-	 * @param  {String} url
-	 * @param  {Object} data
+	 * @param  {String}  method
+	 * @param  {String}  url
+	 * @param  {Object}  data
 	 * @param  {Boolean} sw
 	 * @return {Promise}
 	 */

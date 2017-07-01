@@ -9,8 +9,8 @@ class Cash {
 	 * @param  {Object} opts
 	 * @return {Promise}     
 	 */
-	create(type, opts){
-		return this._E.__request('post', `${Cash.URL}pagos/efecties.json`, options, true);
+	create(type, opts={}){
+		return this._E.__request('post', `${Cash.URL}pagos/${type}.json`, opts, true);
 	}
 
 	/**

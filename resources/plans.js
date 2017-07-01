@@ -8,7 +8,7 @@ class Plans {
 	 * @param {Object} options
 	 * @api public
 	 */
-	create(options) {
+	create(options={}) {
 		return this._E.__request('post', `${Plans.URL}/create`, options, false);
 	}
 	/**

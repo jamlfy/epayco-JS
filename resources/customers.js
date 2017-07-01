@@ -8,7 +8,7 @@ class Customers {
 	 * @param {Object} options
 	 * @api public
 	 */
-	create(options) {
+	create(options={}) {
 		return this._E.__request('post', `${Customers.URL}/create?`, options, false);
 	}
 	/**
@@ -33,7 +33,7 @@ class Customers {
 	 * @param {String} uid
 	 * @api public
 	 */
-	update(uid, options) {
+	update(uid, options={}) {
 		return this._E.__request('post', `${Customers.URL}/edit/${this._E.__apiKey}/${uid}`, options, false);
 	}
 }

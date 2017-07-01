@@ -1,7 +1,7 @@
 const { enc, mode, pad, AES } = require('crypto-js');
 const HEX = '0000000000000000';
 
-module.exports = function setData(data, privateKey, publicKey, test) {
+module.exports = function setData(data={}, privateKey, publicKey, test) {
 	var set = { public_key, lenguaje, enpruebas : encrypt(test, privateKey) };
 
 	for (var key in data) {

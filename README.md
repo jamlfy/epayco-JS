@@ -17,10 +17,10 @@ $ npm install epayco-js
 ## Usage
 
 ```javascript
-var epayco = require('epayco-js')({
+var epayco = require('epayco-js/node')({
     apiKey: 'PUBLIC_KEY',
     privateKey: 'PRIVATE_KEY',
-    test: true
+    test: true | false
 })
 ```
 In ReactNative
@@ -35,17 +35,15 @@ var epayco = require('epayco-js/reactnative')({
 ### Create Token
 
 ```javascript
-var credit_info = {
+epayco.token.create({
     "card[number]": "4575623182290326",
     "card[exp_year]": "2017",
     "card[exp_month]": "07",
     "card[cvc]": "123"
-}
-epayco.token.create(credit_info)
-    .then(function(token) {
+}).then((token) => {
         console.log(token);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -55,18 +53,17 @@ epayco.token.create(credit_info)
 #### Create
 
 ```javascript
-var customer_info = {
+epayco.customers.create({
     token_card: "toke_id",
     name: "Joe Doe",
     email: "joe@payco.co",
     phone: "3005234321",
     default: true
-}
-epayco.customers.create(customer_info)
-    .then(function(customer) {
+})
+    .then((customer) => {
         console.log(customer);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -75,10 +72,10 @@ epayco.customers.create(customer_info)
 
 ```javascript
 epayco.customers.get("id_customer")
-    .then(function(customer) {
+    .then((customer) => {
         console.log(customer);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -87,10 +84,10 @@ epayco.customers.get("id_customer")
 
 ```javascript
 epayco.customers.list()
-    .then(function(customers) {
+    .then((customers) => {
         console.log(customers);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -98,14 +95,12 @@ epayco.customers.list()
 #### Update
 
 ```javascript
-var update_customer_info = {
+epayco.customers.update("id_customer", {
     name: "Alex"
-}
-epayco.customers.update("id_customer", update_customer_info)
-    .then(function(customer) {
+}).then((customer) => {
         console.log(customer);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -115,7 +110,7 @@ epayco.customers.update("id_customer", update_customer_info)
 #### Create
 
 ```javascript
-var plan_info = {
+epayco.plans.create({
     id_plan: "coursereact",
     name: "Course react js",
     description: "Course react and redux",
@@ -124,12 +119,11 @@ var plan_info = {
     interval: "month",
     interval_count: 1,
     trial_days: 30
-}
-epayco.plans.create(plan_info)
-    .then(function(plan) {
+})
+    .then((plan) => {
         console.log(plan);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -138,10 +132,10 @@ epayco.plans.create(plan_info)
 
 ```javascript
 epayco.plans.get("id_plan")
-    .then(function(plan) {
+    .then((plan) => {
         console.log(plan);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -150,10 +144,10 @@ epayco.plans.get("id_plan")
 
 ```javascript
 epayco.plans.list()
-    .then(function(plans) {
+    .then((plans) => {
         console.log(plans);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -162,10 +156,10 @@ epayco.plans.list()
 
 ```javascript
 epayco.plans.delete("id_plan")
-    .then(function(plan) {
+    .then((plan) => {
         console.log(plan);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -175,18 +169,17 @@ epayco.plans.delete("id_plan")
 #### Create
 
 ```javascript
-var subscription_info = {
+epayco.subscriptions.create({
     id_plan: "-id_plan",
     customer: "id_customer",
     token_card: "id_token",
     doc_type: "CC",
     doc_number: "5234567"
-}
-epayco.subscriptions.create(subscription_info)
-    .then(function(subscription) {
+})
+    .then((subscription) => {
         console.log(subscription);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -194,12 +187,11 @@ epayco.subscriptions.create(subscription_info)
 #### Retrieve
 
 ```javascript
-begin
 epayco.subscriptions.get("id_subscription")
-    .then(function(subscription) {
+    .then((subscription) => {
         console.log(subscription);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -208,10 +200,10 @@ epayco.subscriptions.get("id_subscription")
 
 ```javascript
 epayco.subscriptions.list()
-    .then(function(subscriptions) {
+    .then((subscriptions) => {
         console.log(subscriptions);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -220,10 +212,10 @@ epayco.subscriptions.list()
 
 ```javascript
 epayco.subscriptions.cancel("id_subscription")
-    .then(function(subscription) {
+    .then((subscription) => {
         console.log(subscription);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -231,18 +223,17 @@ epayco.subscriptions.cancel("id_subscription")
 #### Pay Subscription
 
 ```javascript
-var subscription_info = {
+epayco.subscriptions.charge({
     id_plan: "-id_plan",
     customer: "id_customer",
     token_card: "id_token",
     doc_type: "CC",
     doc_number: "5234567"
-}
-epayco.subscriptions.charge(subscription_info)
-    .then(function(subscription) {
+})
+    .then((subscription) => {
         console.log(subscription);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -252,7 +243,7 @@ epayco.subscriptions.charge(subscription_info)
 #### Create
 
 ```javascript
-var pse_info = {
+epayco.bank.create({
     bank: "1022",
     invoice: "1472050778",
     description: "pay test",
@@ -271,12 +262,11 @@ var pse_info = {
     url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     method_confirmation: "GET",
-}
-epayco.bank.create(pse_info)
-    .then(function(bank) {
+})
+    .then((bank) => {
         console.log(bank);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -285,10 +275,10 @@ epayco.bank.create(pse_info)
 
 ```javascript
 epayco.bank.get("transaction_id")
-    .then(function(bank) {
+    .then((bank) => {
         console.log(bank);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -298,7 +288,7 @@ epayco.bank.get("transaction_id")
 #### Create
 
 ```javascript
-var cash_info = {
+epayco.cash.create("efecty", {
     invoice: "1472050778",
     description: "pay test",
     value: "20000",
@@ -316,12 +306,11 @@ var cash_info = {
     url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     method_confirmation: "GET",
-}
-epayco.cash.create("efecty", cash_info)
-    .then(function(cash) {
+})
+    .then((cash) => {
         console.log(cash);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -330,10 +319,10 @@ epayco.cash.create("efecty", cash_info)
 
 ```javascript
 epayco.cash.get("transaction_id")
-    .then(function(cash) {
+    .then((cash) => {
         console.log(cash);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -343,7 +332,7 @@ epayco.cash.get("transaction_id")
 #### Create
 
 ```javascript
-var payment_info = {
+epayco.charge.create({
     token_card: "token_id",
     customer_id: "customer_id",
     doc_type: "CC",
@@ -358,12 +347,11 @@ var payment_info = {
     tax_base: "100000",
     currency: "COP",
     dues: "12"
-}
-epayco.charge.create(payment_info)
-    .then(function(charge) {
+})
+    .then((charge) => {
         console.log(charge);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
@@ -371,12 +359,11 @@ epayco.charge.create(payment_info)
 #### Retrieve
 
 ```javascript
-begin
 epayco.charge.get("transaction_id")
-    .then(function(charge) {
+    .then((charge) => {
         console.log(charge);
     })
-    .catch(function(err) {
+    .catch((err) => {
         console.log("err: " + err);
     });
 ```
