@@ -9,8 +9,6 @@ const Bank = require('./resources/bank');
 const Cash = require('./resources/cash');
 const Charge = require('./resources/charge');
 
-const lenguaje = 'javascript';
-
 class Epayco {
 
 	/**
