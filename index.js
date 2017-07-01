@@ -1,5 +1,4 @@
 const request = require('superagent');
-const IP = require('ip');
 
 const setData = require('./resources/crypto');
 const Token = require('./resources/token');
@@ -19,9 +18,10 @@ class Epayco {
 	 * @param  {String}  options.apiKey
 	 * @param  {String}  options.privateKey
 	 * @param  {Boolean} options.test
+	 * @param  {Boolean} react
 	 * @return {Object}
 	 */
-	constructor({ apiKey, privateKey, test }){
+	constructor({ apiKey, privateKey, test }, react){
 		if (!(this instanceof Epayco)) {
 			return new Epayco({ apiKey, privateKey, test });
 		}
@@ -38,6 +38,10 @@ class Epayco {
 		this.cash = new Cash(this);
 		this.charge = new Charge(this);
 
+		if(!react){
+			this.ip = require('ip').address();
+		}
+
 		return this;
 	}
 
@@ -50,8 +54,9 @@ class Epayco {
 	 * @return {Promise}
 	 */
 	__request (method, url, data={}, sw) {
-		//Set ip
-		data['ip'] = IP.address();
+		if(this.ip){
+			data['ip'] = IP.address();
+		}
 
 		if (sw) {
 			data = setData(data, this.__privateKey, this.__apiKey, this.test);

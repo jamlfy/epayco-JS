@@ -331,7 +331,7 @@ epayco.cash.get("transaction_id")
 
 #### Create
 
-```javascript
+```javascript`git 
 epayco.charge.create({
     token_card: "token_id",
     customer_id: "customer_id",
