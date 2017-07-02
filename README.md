@@ -11,25 +11,17 @@ API to interact with Epayco <https://epayco.co/docs/api/>
 As usual, you can install it using npm.
 
 ```
-$ npm install epayco-js
+$ npm install epayco
 ```
 
 ## Usage
 
 ```javascript
-var epayco = require('epayco-js/node')({
+var epayco = require('epayco-js')({
     apiKey: 'PUBLIC_KEY',
     privateKey: 'PRIVATE_KEY',
     test: true | false
-})
-```
-In ReactNative
-```javascript
-var epayco = require('epayco-js/reactnative')({
-    apiKey: 'PUBLIC_KEY',
-    privateKey: 'PRIVATE_KEY',
-    test: true
-})
+}, isReact);
 ```
 
 ### Create Token
