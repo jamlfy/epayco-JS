@@ -1,6 +1,6 @@
 {
   "name": "epayco",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "epayco client",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,6 @@
   "homepage": "https://github.com/alejonext/epayco-JS#readme",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
-    "ip": "^1.1.5",
     "query-string": "^4.3.4",
     "superagent": "^3.5.2"
   }

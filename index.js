@@ -19,7 +19,7 @@ class Epayco {
 	 * @param  {Boolean} react
 	 * @return {Object}
 	 */
-	constructor({ apiKey, privateKey, test }, react){
+	constructor({ apiKey, privateKey, test }){
 		if (!(this instanceof Epayco)) {
 			return new Epayco({ apiKey, privateKey, test });
 		}
@@ -35,10 +35,6 @@ class Epayco {
 		this.bank = new Bank(this);
 		this.cash = new Cash(this);
 		this.charge = new Charge(this);
-
-		if(!react){
-			this.ip = require('ip').address();
-		}
 
 		return this;
 	}
