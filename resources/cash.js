@@ -10,7 +10,7 @@ class Cash {
 	 * @return {Promise}     
 	 */
 	create(type, opts={}){
-		return this._E.__request('post', `${Cash.URL}pagos/${type}.json`, opts, true);
+		return this._E.__request('post', `${Cash.URL}pagos/${Cash.TYPES[type] || Cash.TYPES.baloto}.json`, opts, true);
 	}
 
 	/**
@@ -24,6 +24,12 @@ class Cash {
 			public_key : this._E.__apiKey
 		}, true);
 	}
+};
+
+Cash.TYPES = {
+	efecty : 'efecties',
+	baloto : 'balotos',
+	ganas : 'gana'
 };
 
 Cash.URL = '/restpagos/';

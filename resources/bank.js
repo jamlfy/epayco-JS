@@ -13,6 +13,15 @@ class Bank {
 	}
 
 	/**
+	 * [create description]
+	 * @param  {Object} opts 
+	 * @return {Promise}
+	 */
+	list(){
+		return this._E.__request('get', `${Bank.URL}pse/bancos.json`, {}, true);
+	}
+
+	/**
 	 * [get description]
 	 * @param  {String} transactionID 
 	 * @return {Promise}
