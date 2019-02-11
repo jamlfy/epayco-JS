@@ -59,12 +59,12 @@ class Epayco {
 			url = Epayco.BASE_URL + url;
 		}
 
-		 return new Promise((resolve, reject) => request(method, url)
-				.auth(this.__apiKey, '')
-				.set('type', 'sdk')
-				.query(method === 'get' && data || {})
-				.send(method !== 'get' && data || {})
-				.end((res) => res.ok ? resolve(res.body) : reject(res.error)));
+		return new Promise((resolve, reject) => request(method, url)
+			.auth(this.__apiKey, '')
+			.set('type', 'sdk')
+			.query(method === 'get' && data || {})
+			.send(method !== 'get' && data || {})
+			.end((a, res) => res.ok ? resolve(res.body) : reject(res.error)));
 	}
 };
 
